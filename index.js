@@ -5,6 +5,7 @@ const bodyParser = require('body-parser')
 const app = express()
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json());
+app.use(express.urlencoded({extended: true}));
 
 const articleControllerClass = require('./controllers/article');
 const articleController = new articleControllerClass()

@@ -30,7 +30,27 @@ class articleController {
             message: `Created article with id ${articleId}`,
             article: {id: articleId, ...newArticle} 
         })
+    }
+    
+    async updateArticle(req, res){
+        const articleId = req.params.id;
+        console.log(req.body);
+
+        const articleData = {
+            name: req.body.name,
+            slug: req.body.slug,
+            image: req.body.image,
+            body: req.body.body,
+            published: new Date().toISOString().slice(0, 19).replace('T', ' '),
+            author_id: req.body.author_id
+        } 
+        try {
+            const updatedArticle = await articleModel.update(articleId, articleData)
+        } catch (error){
+            console.error(error);
+            res.status(500).send('Error updating article');
+        }}
     } 
-}
+
 
 module.exports = articleController
