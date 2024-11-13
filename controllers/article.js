@@ -50,6 +50,16 @@ class articleController {
             console.error(error);
             res.status(500).send('Error updating article');
         }}
+
+        async deleteArticle(req, res){
+            const articleId = req.params.id;
+            try { 
+                const deletedArticle = await articleModel.delete(articleId)
+            } catch (error) {
+                console.error(error);
+                res.status(500).send('Error deleting article');
+            } 
+        } 
     } 
 
 
